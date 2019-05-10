@@ -19,12 +19,12 @@ for (file in temp){
 
 #Create empty year csv files
 for (ward in list){
+  nonempty<-tickets[!is.na(tickets$ward),]
   setwd("~/Downloads/data/exports/wards")
-  labels<-tickets[tickets$ward==500,]
+  labels<-nonempty[nonempty$ward==500,]
   write.csv(labels, file=paste(toString(ward), ".csv", sep=""), row.names=FALSE)
 }
 setwd("~/Downloads/data/exports/wards")
-labels<-tickets[tickets$ward==500,]
 write.csv(labels, file="empty.csv", row.names=FALSE)
 
 
