@@ -1,5 +1,5 @@
 <h1>Duplicate Ticket Project</h1>
-Authors: Sergio Servantez, Parker Joncus, Manish Suthar
-Advisor: Dr. Robert Ellis
-Illinois Institute of Technology
-Project Sponsor: ProPublica
+<p><b>Authors:</b> Sergio Servantez, Parker Joncus, Manish Suthar</p>
+<p><b>Advisor:</b> Dr. Robert Ellis</p>
+<p>Illinois Institute of Technology</p>
+<p><b>Project Sponsor:</b> ProPublica</p>
