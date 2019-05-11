@@ -23,4 +23,7 @@
 <li>Total number of repeats issued since 1996: 643,446</li>
 <li>Total excess paid on repeat tickets: $28,288,495</li>
 <li>Total excess paid on repeat expired registration tickets: $5,634,383</li>
+<li>Identification of the officers who have issued the highest number of repeat tickets</li>
+<li></li>
+<li></li>
 </ul>
