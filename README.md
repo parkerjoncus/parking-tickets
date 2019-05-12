@@ -30,6 +30,10 @@
 </ul>
 
 <hr></hr>
+<p><b>Data</b></p>
+All data can be found in this repositiory, on the Chicago Data Portal (https://data.cityofchicago.org), or in our personal Google Drive. More information can be found in the file datasets/dataset_links
+
+<hr></hr>
 <p><b>Tools</b></p>
 <ul>
 <li>Python</li>
