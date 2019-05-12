@@ -24,6 +24,17 @@
 <li>Total excess paid on repeat tickets: $28,288,495</li>
 <li>Total excess paid on repeat expired registration tickets: $5,634,383</li>
 <li>Identification of the officers who have issued the highest number of repeat tickets</li>
-<li></li>
-<li></li>
+<li>Created multiple linear regression models to predict the number of expired plate duplicate tickets in each ward based on demographic, health, and socioeconomic data.</li>
+<li>Used the regerssion models to find what factors are statistcally significant in determining ticket counts within wards and if the factors positively or negativly affect the ticket counts</li>
+<li>Found that while race may not be the reason why people get more or less tickets, there is a difference in the magnitude at which different races are ticketed.</li>
+</ul>
+
+<hr></hr>
+<p><b>Tools</b></p>
+<ul>
+<li>Python</li>
+<li>R</li>
+<li>QGIS</li>
+<li>Google Drive</li>
+<li>Github</li>
 </ul>
