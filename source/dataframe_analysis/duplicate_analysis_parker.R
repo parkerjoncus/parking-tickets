@@ -1,22 +1,29 @@
+#This code is meant to find any insights into duplicate tickets before we had the duplicate dataset.
+#Some stories of indiviuals who were given a ton of tickets in a short amount of time came from this analysis.
+#Load Librarys
 library(readr)
 library(sqldf)
 
 #Ward 11 is bridgeport area
+#This code assume that you have the ward data downloads from the google drive.
 ward <- read_csv("~/Downloads/data/exports/wards/11.csv", 
                 col_types = cols(issue_date = col_datetime(format = "%Y-%m-%d %H:%M:%S"), 
                                  ticket_queue_date = col_date(format = "%Y-%m-%d")))
 View(ward)
 
+#Clean a little bit for easier checking of the data frame
 ward$violation_code<-as.factor(ward$violation_code)
 ward$day<-as.numeric(format(ward$issue_date, "%d"))
 ward$minute<-as.numeric(format(ward$issue_date, "%M"))
 
+#Find which people are ticketed the most
 counts<-sqldf('SELECT license_plate_number, COUNT(ticket_number) AS num FROM ward GROUP BY license_plate_number ORDER BY num DESC')
 
-#NA license plate numbers.
+#The first license plate is huge and turns out to be NA license plate numbers, so not the same person
 test<-ward[ward$license_plate_number==counts$license_plate_number[1],]
 View(test)
 
+#The real person who is tickets most
 most<-ward[ward$license_plate_number==counts$license_plate_number[2],]
 View(most)
 sqldf('SELECT violation_code, violation_description, COUNT(violation_code) AS num FROM most GROUP BY violation_code ORDER BY num DESC')
@@ -36,7 +43,7 @@ time$avgdate<-time$diff/time$num
 time$avgdays<-time$avgdate/(3600*24)
 #There are 3 officers that write a city sticker ticket less than every 10 days on average.
 
-
+#Next person
 person2<-ward[ward$license_plate_number==counts$license_plate_number[3],]
 sum(person2$total_payments)
 sum(person2$current_amount_due)
@@ -44,6 +51,7 @@ sum(person2$current_amount_due)
 sqldf('SELECT violation_code, violation_description, COUNT(violation_code) AS num FROM person2 GROUP BY violation_code ORDER BY num DESC')
 #Mainly city stickers or expired plates. When viewing data, many times the two are paired together at the same time.
 
+#Third person
 person3<-ward[ward$license_plate_number==counts$license_plate_number[4],]
 sum(person3$total_payments)
 sum(person3$current_amount_due)
@@ -52,6 +60,7 @@ sum(person3$current_amount_due)
 sqldf('SELECT violation_code, violation_description, COUNT(violation_code) AS num FROM person3 GROUP BY violation_code ORDER BY num DESC')
 #Mainly expired meters
 
+#4th person
 person4<-ward[ward$license_plate_number==counts$license_plate_number[5],]
 sum(person4$total_payments)
 sum(person4$current_amount_due)
@@ -62,6 +71,7 @@ sum(person4$current_amount_due)
 sqldf('SELECT violation_code, violation_description, COUNT(violation_code) AS num FROM person4 GROUP BY violation_code ORDER BY num DESC')
 #Mainly expired plates and permit parking
 
+#5th person
 person5<-ward[ward$license_plate_number==counts$license_plate_number[6],]
 sum(person5$total_payments)
 sum(person5$current_amount_due)
@@ -70,13 +80,14 @@ sum(person5$current_amount_due)
 sqldf('SELECT violation_code, violation_description, COUNT(violation_code) AS num FROM person5 GROUP BY violation_code ORDER BY num DESC')
 #street cleaning mostly
 
-
+#Try another ward
 #28th ward, owes the second most
 ward <- read_csv("~/Downloads/data/exports/wards/28.csv", 
                  col_types = cols(issue_date = col_datetime(format = "%Y-%m-%d %H:%M:%S"), 
                                   ticket_queue_date = col_date(format = "%Y-%m-%d")))
 View(ward)
 
+#Slight cleaning
 ward$violation_code<-as.factor(ward$violation_code)
 
 counts<-sqldf('SELECT license_plate_number, COUNT(ticket_number) AS num FROM ward GROUP BY license_plate_number ORDER BY num DESC')
@@ -86,6 +97,7 @@ counts<-sqldf('SELECT license_plate_number, COUNT(ticket_number) AS num FROM war
 test<-ward[ward$license_plate_number==counts$license_plate_number[1],]
 View(test)
 
+#Person ticketed most
 most<-ward[ward$license_plate_number==counts$license_plate_number[2],]
 sum(most$total_payments)
 sum(most$current_amount_due)
@@ -94,6 +106,7 @@ sum(most$current_amount_due)
 sqldf('SELECT violation_code, violation_description, COUNT(violation_code) AS num FROM most GROUP BY violation_code ORDER BY num DESC')
 #4 types that have all been given out together
 
+#2nd most ticketed
 person2<-ward[ward$license_plate_number==counts$license_plate_number[3],]
 sum(person2$total_payments)
 sum(person2$current_amount_due)
@@ -103,6 +116,7 @@ sum(person2$current_amount_due)
 sqldf('SELECT violation_code, violation_description, COUNT(violation_code) AS num FROM person2 GROUP BY violation_code ORDER BY num DESC')
 #Mainly city stickers or hazardous DilaPitatd Vehicle
 
+#3rd most
 person3<-ward[ward$license_plate_number==counts$license_plate_number[4],]
 sum(person3$total_payments)
 sum(person3$current_amount_due)
@@ -111,6 +125,7 @@ sum(person3$current_amount_due)
 sqldf('SELECT violation_code, violation_description, COUNT(violation_code) AS num FROM person3 GROUP BY violation_code ORDER BY num DESC')
 #Mainly expired stickers and rear and front plates
 
+#4th most
 person4<-ward[ward$license_plate_number==counts$license_plate_number[5],]
 sum(person4$total_payments)
 sum(person4$current_amount_due)
@@ -120,6 +135,7 @@ sum(person4$current_amount_due)
 sqldf('SELECT violation_code, violation_description, COUNT(violation_code) AS num FROM person4 GROUP BY violation_code ORDER BY num DESC')
 #abandanded and city sticker
 
+#5th most
 person5<-ward[ward$license_plate_number==counts$license_plate_number[6],]
 sum(person5$total_payments)
 sum(person5$current_amount_due)
